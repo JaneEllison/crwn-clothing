@@ -6,12 +6,13 @@ import CollectionPreview from '../../components/preview-collection/collection-pr
 
 const ShopPage = () => {
   const [collectionsData] = useState(SHOP_DATA);
+  const renderedCollectionsData = collectionsData.map(({ id, ...otherCollectionProps }) => {
+    return <CollectionPreview key={id} {...otherCollectionProps} />
+  })
 
   return (
     <div className='shop-page'>
-      {collectionsData.map(({ id, ...otherCollectionProps }) => (
-        <CollectionPreview key={id} {...otherCollectionProps} />
-      ))}
+      {renderedCollectionsData}
     </div>
   );
 };

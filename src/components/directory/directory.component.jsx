@@ -9,11 +9,13 @@ import './directory.styles.scss';
 const Directory = () => {
   const [sections] = useState(SECTIONS_DATA);
 
+  const renderedSections = sections.map(({ id, ...otherSectionProps }) => {
+    return <MenuItem key={id} {...otherSectionProps} />
+  });
+
   return (
     <div className='directory-menu'>
-      {sections.map(({ id, ...otherSectionProps }) => (
-        <MenuItem key={id} {...otherSectionProps} />
-      ))}
+      {renderedSections}
     </div>
   );
 };
