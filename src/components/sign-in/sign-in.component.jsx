@@ -6,7 +6,7 @@ import CustomButton from '../custom-button/custom-button.component';
 import './sign-in.styles.scss';
 
 const SignIn = () => {
-  const [signInData, setSignInData] = useState({
+  const [signInValues, setSignInValues ] = useState({
     email: '',
     password: '',
   });
@@ -14,13 +14,13 @@ const SignIn = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setSignInData({ email: '', password: '' });
+    setSignInValues({ email: '', password: '' });
   };
 
   const handleChange = (event) => {
     const { value, name } = event.target;
 
-    setSignInData({ ...signInData, [name]: value });
+    setSignInValues({ ...signInValues, [name]: value });
   };
 
   return (
@@ -32,7 +32,7 @@ const SignIn = () => {
         <FormInput
           name='email'
           type='email'
-          value={signInData.email}
+          value={signInValues.email}
           label='email'
           handleChange={handleChange}
           required
@@ -40,7 +40,7 @@ const SignIn = () => {
         <FormInput
           name='password'
           type='password'
-          value={signInData.password}
+          value={signInValues.password}
           label='password'
           handleChange={handleChange}
           required
