@@ -7,29 +7,34 @@ import { ReactComponent as Logo } from '../../assets/images/crown-icon.svg';
 
 import './header.styles.scss';
 
-const Header = ({ currentUser }) => (
-  <div className='header'>
-    <Link className='logo-container' to='/'>
-      <Logo className='logo' />
-    </Link>
-    <div className='options'>
-      <Link className='option' to='/shop'>
-        SHOP
+const Header = ({ currentUser }) => {
+
+  const handleSignOut = () => auth.signOut();
+
+  return (
+    <div className='header'>
+      <Link className='logo-container' to='/'>
+        <Logo className='logo' />
       </Link>
-      <Link className='option' to='/contacts'>
-        CONTACTS
-      </Link>
-      {currentUser ? (
-        <div className='option' onClick={() => auth.signOut()}>
-          SIGN OUT
-        </div>
-      ) : (
-        <Link className='option' to='/signin'>
-          SIGN IN
+      <div className='options'>
+        <Link className='option' to='/shop'>
+          SHOP
         </Link>
-      )}
+        <Link className='option' to='/contacts'>
+          CONTACTS
+        </Link>
+        {currentUser ? (
+          <div className='option' onClick={handleSignOut}>
+            SIGN OUT
+          </div>
+        ) : (
+          <Link className='option' to='/signin'>
+            SIGN IN
+          </Link>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Header;
