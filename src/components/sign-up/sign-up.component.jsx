@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { auth, createUserProfilDocument } from '../../firebase/firebase.utils';
+import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 import './sign-up.styles.scss';
 
@@ -21,7 +21,7 @@ const SignUp = () => {
     const { displayName, email, password, confirmPassword } = signUpValues;
 
     if (password !== confirmPassword) {
-      alert('password dont mutch');
+      alert("password don't match");
       return;
     }
 
@@ -31,7 +31,7 @@ const SignUp = () => {
         password
       );
 
-      await createUserProfilDocument(user, { displayName });
+      await createUserProfileDocument(user, { displayName });
       setSignUpValues({
         displayName: '',
         email: '',

@@ -9,9 +9,7 @@ import { ReactComponent as Logo } from '../../assets/images/crown-icon.svg';
 import './header.styles.scss';
 
 const Header = ({ currentUser }) => {
-
-  console.log(currentUser);
-
+  
   const handleSignOut = () => auth.signOut();
 
   return (
