@@ -10,8 +10,7 @@ import { ReactComponent as Logo } from '../../assets/images/crown-icon.svg';
 
 import './header.styles.scss';
 
-const Header = ({ currentUser }) => {
-  
+const Header = ({ currentUser, hidden }) => {
   const handleSignOut = () => auth.signOut();
 
   return (
@@ -37,13 +36,14 @@ const Header = ({ currentUser }) => {
         )}
         <CartIcon />
       </div>
-      <CartDropdown />
+      {hidden ? null : <CartDropdown />}
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return { currentUser: state.user.currentUser };
-};
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser,
+  hidden,
+});
 
 export default connect(mapStateToProps)(Header);
