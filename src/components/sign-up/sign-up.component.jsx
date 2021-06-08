@@ -12,7 +12,7 @@ const SignUp = () => {
     displayName: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
 
   const handleSubmit = async (event) => {
@@ -21,7 +21,7 @@ const SignUp = () => {
     const { displayName, email, password, confirmPassword } = signUpValues;
 
     if (password !== confirmPassword) {
-      alert("password don't match");
+      alert("Passwords don't match.");
       return;
     }
 
@@ -36,9 +36,8 @@ const SignUp = () => {
         displayName: '',
         email: '',
         password: '',
-        confirmPassword: ''
-      })
-
+        confirmPassword: '',
+      });
     } catch (error) {
       console.error(error);
     }
@@ -48,7 +47,7 @@ const SignUp = () => {
     const { value, name } = event.target;
 
     setSignUpValues({ ...signUpValues, [name]: value });
-  }
+  };
 
   const { displayName, email, password, confirmPassword } = signUpValues;
 
