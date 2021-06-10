@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
+
+import { selectDirectorySections } from '../../redux/directory/directory.selectors';
 
 import MenuItem from '../menu-item/menu-item.component';
-
-import SECTIONS_DATA from '../../mock/sections.data'
 
 import './directory.styles.scss';
 
 const Directory = () => {
-  const [sections] = useState(SECTIONS_DATA);
+  const sections = useSelector(selectDirectorySections);
 
   const renderedSections = sections.map(({ id, ...otherSectionProps }) => {
-    return <MenuItem key={id} {...otherSectionProps} />
+    return <MenuItem key={id} {...otherSectionProps} />;
   });
 
-  return (
-    <div className='directory-menu'>
-      {renderedSections}
-    </div>
-  );
+  return <div className='directory-menu'>{renderedSections}</div>;
 };
 
 export default Directory;
