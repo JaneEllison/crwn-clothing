@@ -11,10 +11,10 @@ const CartIcon = () => {
   const dispatch = useDispatch();
   const countedSelectItems = useSelector(selectCartItemsCount);
   
-  const cartIconClick = () => dispatch(toggleCartHidden());
+  const handleCartIconClick = () => dispatch(toggleCartHidden());
 
   return (
-    <div className='cart-icon' onClick={cartIconClick}>
+    <div className='cart-icon' onClick={handleCartIconClick}>
       <ShoppingIcon className='shopping-icon' />
       <span className='item-count'>{countedSelectItems}</span>
     </div>
