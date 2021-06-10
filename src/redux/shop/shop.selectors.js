@@ -1,10 +1,19 @@
 import { createSelector } from 'reselect';
+import memoize from 'lodash.memoize';
+
+import collectionId from '../../mock/collection-id.data';
 
 const selectShop = (state) => state.shop;
 
-const selectCollections = createSelector(
+export const selectCollections = createSelector(
   [selectShop],
   (shop) => shop.collections
 );
 
-export default selectCollections;
+export const selectCollection = memoize((collectionUrlParam) =>
+  createSelector([selectCollections], (collections) =>
+    collections.find(
+      (collection) => collection.id === collectionId[collectionUrlParam]
+    )
+  )
+);
