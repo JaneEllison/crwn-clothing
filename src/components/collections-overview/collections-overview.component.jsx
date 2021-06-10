@@ -9,14 +9,17 @@ import './collections-overview.styles.scss';
 const CollectionsOverview = () => {
   const collectionsData = useSelector(selectCollections);
 
-  const renderedCollectionsData = collectionsData.map(({ id, ...otherCollectionProps }) => {
-    return <CollectionPreview key={id} {...otherCollectionProps} />
-  })
+  const renderedCollectionsData = collectionsData.map(
+    ({ id, ...otherCollectionProps }) => {
+      return <CollectionPreview key={id} {...otherCollectionProps} />;
+    }
+  );
 
   return (
-  <div className='collections-overview'>
-          {renderedCollectionsData}
-  </div>
-)};
+    <div className='collections-overview'>
+      {renderedCollectionsData}
+    </div>
+  );
+};
 
 export default CollectionsOverview;
