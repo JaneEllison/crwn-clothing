@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import CheckoutItem from '../../components/checkout-item/chekout-item.component';
+import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
 
 import {
   selectCartItems,
@@ -11,7 +12,7 @@ import {
 import './checkout.styles.scss';
 
 const CheckoutPage = () => {
-  const countedTotalPrice = useSelector(selectCartTotal);
+  const totalPrice = useSelector(selectCartTotal);
   const cartItems = useSelector(selectCartItems);
 
   const renderedCheckoutItemsList = cartItems.map((cartItem) => (
@@ -39,8 +40,14 @@ const CheckoutPage = () => {
       </div>
       {renderedCheckoutItemsList}
       <div className='total'>
-        <span>TOTAL: ${countedTotalPrice}</span>
+        <span>TOTAL: ${totalPrice}</span>
       </div>
+      <div className='test-warning'>
+        *Please use the following test credit card for payments*
+        <br />
+        4242 4242 4242 4242 - Exp: 01/22 - CVV: 123
+      </div>
+      <StripeCheckoutButton price={totalPrice}/>
     </div>
   );
 };
