@@ -4,20 +4,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 import { selectCartItemsCount } from '../../redux/cart/cart.selectors';
 
-import { ReactComponent as ShoppingIcon } from '../../assets/images/shopping-bag.svg';
-import './cart-icon.styles.scss';
+import {
+  CartIconContainer,
+  ShoppingIconContainer,
+  ItemCountContainer,
+} from './cart-icon.styles';
 
 const CartIcon = () => {
   const dispatch = useDispatch();
   const countedSelectItems = useSelector(selectCartItemsCount);
-  
+
   const handleCartIconClick = () => dispatch(toggleCartHidden());
 
   return (
-    <div className='cart-icon' onClick={handleCartIconClick}>
-      <ShoppingIcon className='shopping-icon' />
-      <span className='item-count'>{countedSelectItems}</span>
-    </div>
+    <CartIconContainer onClick={handleCartIconClick}>
+      <ShoppingIconContainer />
+      <ItemCountContainer>{countedSelectItems}</ItemCountContainer>
+    </CartIconContainer>
   );
 };
 
