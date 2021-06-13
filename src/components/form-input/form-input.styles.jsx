@@ -1,9 +1,21 @@
-.group {
+import styled, { css } from 'styled-components';
+
+const labelStyles = css`
+  top: -14px;
+  font-size: 12px;
+  color: black;
+`;
+
+export const GroupContainer = styled.div`
   position: relative;
   margin: 45px 0;
-}
 
-.group .form-input {
+  input[type='password'] {
+    letter-spacing: 0.3em;
+  }
+`;
+
+export const FormInputContainer = styled.input`
   background: none;
   background-color: white;
   color: grey;
@@ -15,23 +27,16 @@
   border-radius: 0;
   border-bottom: 1px solid grey;
   margin: 25px 0;
-}
 
-.group .form-input:focus {
-  outline: none;
-}
+  &:focus {
+    outline: none;
+  }
+  &:focus ~ label {
+    ${labelStyles}
+  }
+`;
 
-.group .form-input:focus ~ .form-input-label {
-  top: -14px;
-  font-size: 12px;
-  color: black;
-}
-
-.group input[type='password'] {
-  letter-spacing: 0.3em;
-}
-
-.group .form-input-label {
+export const FormInputLabel = styled.label`
   color: grey;
   font-size: 16px;
   font-weight: normal;
@@ -41,11 +46,8 @@
   top: 10px;
   -webkit-transition: 300ms ease all;
   transition: 300ms ease all;
-}
 
-.group .form-input-label.shrink {
-  top: -14px;
-  font-size: 12px;
-  color: black;
-}
-/*# sourceMappingURL=form-input.styles.css.map */
+  &.shrink {
+    ${labelStyles}
+  }
+`;
