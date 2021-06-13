@@ -5,7 +5,11 @@ import CollectionItem from '../../components/collection-item/collection-item.com
 
 import { selectCollection } from '../../redux/shop/shop.selectors';
 
-import './collection.styles.scss';
+import {
+  CollectionPageContainer,
+  CollectionTitle,
+  CollectionItemsContainer,
+} from './collection.styles';
 
 const CollectionPage = ({ match }) => {
   const { collectionId } = match.params;
@@ -16,12 +20,12 @@ const CollectionPage = ({ match }) => {
     <CollectionItem key={item.id} item={item} />
   ));
   return (
-    <div className='collection-page'>
-      <h2 className='title'>{title}</h2>
-      <div className='items'>
+    <CollectionPageContainer>
+      <CollectionTitle>{title}</CollectionTitle>
+      <CollectionItemsContainer>
         {renderedCollectionsItemData}
-      </div>
-    </div>
+      </CollectionItemsContainer>
+    </CollectionPageContainer>
   );
 };
 
