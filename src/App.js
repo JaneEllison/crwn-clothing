@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import HomePage from './pages/homepage/homepage.component';
@@ -10,32 +10,41 @@ import CheckoutPage from './pages/checkout/checkout.component';
 
 import Header from './components/header/header.component';
 
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import {
+  auth,
+  createUserProfileDocument,
+} from './firebase/firebase.utils';
 
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 
-function App({ setCurrentUser, currentUser }) {
+function App() {
+  const currentUser = useSelector(selectCurrentUser);
+
+  const dispatch = useDispatch();
+  const setNewCurrentUser = (user) => dispatch(setCurrentUser(user));
+
   useEffect(() => {
     let unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
+          setNewCurrentUser({
             id: snapShot.id,
             ...snapShot.data(),
           });
         });
-      } else {
-        setCurrentUser(null);
       }
+
+      setNewCurrentUser(userAuth);
+
     });
 
     return () => {
       unsubscribeFromAuth();
     };
-  }, [setCurrentUser]);
+  }, []);
 
   const renderSignInAndUppage = () =>
     currentUser ? <Redirect to='/' /> : <SignInAndSignUpPage />;
@@ -53,14 +62,4 @@ function App({ setCurrentUser, currentUser }) {
   );
 }
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

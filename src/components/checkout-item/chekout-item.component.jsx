@@ -7,7 +7,6 @@ import {
   addItem,
 } from '../../redux/cart/cart.actions';
 
-// import './checkout-item.styles.scss';
 import {
   CheckoutItemContainer,
   ImageContainer,
