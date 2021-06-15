@@ -13,8 +13,8 @@ import {
 import { updateCollections } from '../../redux/shop/shop.actions';
 
 const ShopPage = ({ match }) => {
-
   const dispatch = useDispatch();
+
   const updateCollection = (collectionsMap) =>
     dispatch(updateCollections(collectionsMap));
 
@@ -26,7 +26,7 @@ const ShopPage = ({ match }) => {
       updateCollection(collectionsMap);
     });
   });
-  
+
   return (
     <div className='shop-page'>
       <Route exact path={`${match.path}`} component={CollectionsOverview} />

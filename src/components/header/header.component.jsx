@@ -20,6 +20,14 @@ import {
 const Header = ({ currentUser, hidden }) => {
   const handleSignOut = () => auth.signOut();
 
+  const renderSignComponent = currentUser ? (
+    <OptionLink as='div' onClick={handleSignOut}>
+      SIGN OUT
+    </OptionLink>
+  ) : (
+    <OptionLink to='/signin'>SIGN IN</OptionLink>
+  );
+
   return (
     <HeaderContainer>
       <LogoContainer to='/'>
@@ -28,14 +36,10 @@ const Header = ({ currentUser, hidden }) => {
       <OptionsContainer>
         <OptionLink to='/shop'>SHOP</OptionLink>
         <OptionLink to='/contacts'>CONTACTS</OptionLink>
-        {currentUser ? (
-          <OptionLink as='div' onClick={handleSignOut}>SIGN OUT</OptionLink>
-        ) : (
-          <OptionLink to='/signin'>SIGN IN</OptionLink>
-        )}
+        {renderSignComponent}
         <CartIcon />
       </OptionsContainer>
-      {hidden ? null : <CartDropdown />}
+      {hidden && <CartDropdown />}
     </HeaderContainer>
   );
 };
