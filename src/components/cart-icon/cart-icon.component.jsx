@@ -12,8 +12,8 @@ import {
 
 const CartIcon = () => {
   const dispatch = useDispatch();
-  const countedSelectItems = useSelector(selectCartItemsCount);
 
+  const countedSelectItems = useSelector(selectCartItemsCount);
   const handleCartIconClick = () => dispatch(toggleCartHidden());
 
   return (
