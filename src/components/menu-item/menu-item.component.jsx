@@ -11,7 +11,9 @@ import {
 
 const MenuItem = ({ title, imageUrl, linkUrl, history, match }) => {
   // const history = useHistory();
-  const addRoutesToHistory = () => history.push(`${match.url}${linkUrl}`);
+  const addRoutesToHistory = () => {
+    history.push(`${match.url}${linkUrl}`);
+  };
 
   return (
     <MenuItemContainer onClick={addRoutesToHistory}>
