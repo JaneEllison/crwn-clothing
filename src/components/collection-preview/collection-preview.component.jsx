@@ -8,9 +8,9 @@ import {
   PreviewContainer,
 } from './collection-preview.styles';
 
-const CollectionPreview = ({ title, items, id }) => {
-  const QUANTITY_ITEMS_ON_PREVIEW = 4;
+const QUANTITY_ITEMS_ON_PREVIEW = 4;
 
+const CollectionPreview = ({ title, items, id }) => {
   const renderedFilteredPreviewItems = items
     .filter((item, idx) => idx < QUANTITY_ITEMS_ON_PREVIEW)
     .map((item) => <CollectionItem key={item.id} item={item} />);

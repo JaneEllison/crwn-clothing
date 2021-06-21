@@ -16,12 +16,12 @@ import {
 } from './sign-in.styles';
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+
   const [signInValues, setSignInValues] = useState({
     email: '',
     password: '',
   });
-
-  const dispatch = useDispatch();
 
   const onGoogleSignInStart = () => dispatch(googleSignInStart());
   const onEmailSignInStart = (email, password) =>

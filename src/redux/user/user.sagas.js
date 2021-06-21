@@ -8,14 +8,16 @@ import {
   signOutSuccess,
   signOutFailure,
   signUpSuccess,
-  signUpFailure
+  signUpFailure,
 } from './user.actions';
+
+import { clearCart } from '../cart/cart.actions';
 
 import {
   auth,
   googleProvider,
   createUserProfileDocument,
-  getCurrentUser
+  getCurrentUser,
 } from '../../firebase/firebase.utils';
 
 export function* getSnapshotFromUserAuth(userAuth, additionalData) {
@@ -63,6 +65,7 @@ export function* isUserAuthenticated() {
 export function* signOut() {
   try {
     yield auth.signOut();
+    yield put(clearCart());
     yield put(signOutSuccess());
   } catch (error) {
     yield put(signOutFailure(error));
@@ -113,6 +116,6 @@ export function* userSagas() {
     call(onCheckUserSession),
     call(onSignOutStart),
     call(onSignUpStart),
-    call(onSignUpSuccess)
+    call(onSignUpSuccess),
   ]);
 }

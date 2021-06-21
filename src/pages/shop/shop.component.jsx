@@ -10,11 +10,9 @@ import CollectionPageContainer from '../collecton/collection.container';
 const ShopPage = ({match}) => {
   const dispatch = useDispatch();
 
-  const fetchCollections = () => dispatch(fetchCollectionsStart());
-
   useEffect(() => {
-    fetchCollections()
-  },[]);
+    dispatch(fetchCollectionsStart())
+  },[dispatch]);
 
   return (
     <div className='shop-page'>

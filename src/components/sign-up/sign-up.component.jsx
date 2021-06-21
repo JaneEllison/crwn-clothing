@@ -9,17 +9,15 @@ import { signUpStart } from '../../redux/user/user.actions';
 import { SignUpContainer, SignUpTitle } from './sign-up.styles';
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+
   const [signUpValues, setSignUpValues] = useState({
     displayName: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
-
-  const dispatch = useDispatch();
-  const startSignUp = (userCredentials) =>
-    dispatch(signUpStart(userCredentials));
-
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -30,7 +28,7 @@ const SignUp = () => {
       return;
     }
 
-    startSignUp({ displayName, email, password });
+    dispatch(signUpStart({ displayName, email, password }))
   };
 
   const handleChange = (event) => {

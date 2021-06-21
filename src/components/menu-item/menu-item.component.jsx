@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { useRouteMatch, useHistory } from 'react-router-dom';
 
 import {
   MenuItemContainer,
@@ -9,8 +9,10 @@ import {
   ContentSubtitle,
 } from './menu-item.styles';
 
-const MenuItem = ({ title, imageUrl, linkUrl, history, match }) => {
-  // const history = useHistory();
+const MenuItem = ({ title, imageUrl, linkUrl }) => {
+  const match = useRouteMatch();
+  const history = useHistory();
+
   const addRoutesToHistory = () => {
     history.push(`${match.url}${linkUrl}`);
   };
@@ -26,4 +28,4 @@ const MenuItem = ({ title, imageUrl, linkUrl, history, match }) => {
   );
 };
 
-export default withRouter(MenuItem);
+export default MenuItem;

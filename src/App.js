@@ -13,15 +13,13 @@ import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 
 function App() {
+  const dispatch = useDispatch();
+
   const currentUser = useSelector(selectCurrentUser);
 
-  const dispatch = useDispatch();
-  
-  const checkIsUserSession = () => dispatch(checkUserSession());
-
   useEffect(() => {
-    checkIsUserSession();
-  }, []);
+    dispatch(checkUserSession());
+  }, [dispatch]);
 
   const renderSignInAndUppage = () =>
     currentUser ? <Redirect to='/' /> : <SignInAndSignUpPage />;

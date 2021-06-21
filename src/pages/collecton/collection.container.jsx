@@ -5,10 +5,10 @@ import WithSpinner from '../../components/with-spinner/with-spinner.component';
 import CollectionPage from '../collecton/collection.component';
 
 const CollectiomPageContainer = (props) => {
-  const isLoading = useSelector((state) => !selectIsCollectionsLoaded(state));
+  const isLoaded = useSelector((state) => selectIsCollectionsLoaded(state));
   const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
-  return <CollectionPageWithSpinner isLoading={isLoading} {...props}/>;
+  return <CollectionPageWithSpinner isLoading={!isLoaded} {...props}/>;
 };
 
 export default CollectiomPageContainer;

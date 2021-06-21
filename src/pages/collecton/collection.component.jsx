@@ -13,6 +13,7 @@ import {
 
 const CollectionPage = ({ match }) => {
   const { collectionId } = match.params;
+  
   const collection = useSelector(selectCollection(collectionId));
   const { title, items } = collection;
 

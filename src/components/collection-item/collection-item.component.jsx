@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { addItem } from '../../redux/cart/cart.actions';
 
@@ -12,10 +12,15 @@ import {
   PriceContainer,
 } from './collection-item.styles';
 
-const CollectionItem = ({ item, addItem }) => {
+const CollectionItem = ({ item }) => {
+  const dispatch = useDispatch();
+
   const { name, price, imageUrl } = item;
 
-  const addNewItem = () => addItem(item);
+  const addNewItem = useCallback(
+    () => dispatch(addItem(item)),
+    [dispatch, item]
+  );
 
   return (
     <CollectionItemContainer>
@@ -31,10 +36,4 @@ const CollectionItem = ({ item, addItem }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addItem: (item) => dispatch(addItem(item)),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(CollectionItem);
+export default CollectionItem;
