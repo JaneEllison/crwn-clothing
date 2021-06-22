@@ -2,10 +2,11 @@ import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 
-const stripe = require('stripe')(process.env.REACT_APP_PAYMENT_KEY);
+const publishableKey = require('dotenv').config(process.env.REACT_APP_PAYMENT_KEY);
 
 const StripeCheckoutButton = ({ price }) => {
   const priceForStripe = price * 100;
+  
   const onToken = (token) => {
     axios({
       url: 'payment',
@@ -37,7 +38,7 @@ const StripeCheckoutButton = ({ price }) => {
       amount={priceForStripe}
       panelLabel='Pay Now'
       token={onToken}
-      stripeKey={stripe}
+      stripeKey={publishableKey}
     />
   );
 };
