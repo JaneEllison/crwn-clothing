@@ -2,7 +2,8 @@ import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 
-const publishableKey = require('dotenv').config(process.env.REACT_APP_PAYMENT_KEY);
+const publishableKey = process.env.REACT_APP_PAYMENT_KEY;
+console.log(publishableKey);
 
 const StripeCheckoutButton = ({ price }) => {
   const priceForStripe = price * 100;
