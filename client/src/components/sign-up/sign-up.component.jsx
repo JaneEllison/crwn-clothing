@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
@@ -17,25 +17,31 @@ const SignUp = () => {
     password: '',
     confirmPassword: '',
   });
-  
-  const handleSubmit = async (event) => {
-    event.preventDefault();
 
-    const { displayName, email, password, confirmPassword } = signUpValues;
+  const handleSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert("Passwords don't match.");
-      return;
-    }
+      const { displayName, email, password, confirmPassword } = signUpValues;
 
-    dispatch(signUpStart({ displayName, email, password }))
-  };
+      if (password !== confirmPassword) {
+        alert("Passwords don't match.");
+        return;
+      }
 
-  const handleChange = (event) => {
-    const { value, name } = event.target;
+      dispatch(signUpStart({ displayName, email, password }));
+    },
+    [signUpValues, dispatch]
+  );
 
-    setSignUpValues({ ...signUpValues, [name]: value });
-  };
+  const handleChange = useCallback(
+    (event) => {
+      const { value, name } = event.target;
+
+      setSignUpValues({ ...signUpValues, [name]: value });
+    },
+    [signUpValues]
+  );
 
   const { displayName, email, password, confirmPassword } = signUpValues;
 

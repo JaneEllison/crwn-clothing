@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
@@ -14,7 +14,10 @@ const CartIcon = () => {
   const dispatch = useDispatch();
 
   const сartItemsCount = useSelector(selectCartItemsCount);
-  const handleCartIconClick = () => dispatch(toggleCartHidden());
+  
+  const handleCartIconClick = useCallback(() => {
+    dispatch(toggleCartHidden());
+  }, [dispatch]);
 
   return (
     <CartIconContainer onClick={handleCartIconClick}>

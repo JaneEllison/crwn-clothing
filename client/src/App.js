@@ -1,4 +1,4 @@
-import React, { useEffect, lazy, Suspense } from 'react';
+import React, { useEffect, lazy, Suspense, useCallback } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -26,8 +26,10 @@ function App() {
     dispatch(checkUserSession());
   }, [dispatch]);
 
-  const renderSignInAndUppage = () =>
-    currentUser ? <Redirect to='/' /> : <SignInAndSignUpPage />;
+  const renderSignInAndUppage = useCallback(
+    () => (currentUser ? <Redirect to='/' /> : <SignInAndSignUpPage />),
+    [currentUser]
+  );
 
   return (
     <div>

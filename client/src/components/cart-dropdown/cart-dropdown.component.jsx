@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -19,14 +19,14 @@ const CartDropdown = () => {
 
   const cartItems = useSelector(selectCartItems);
 
-  const redirectToCheckoutPage = () => {
+  const redirectToCheckoutPage = useCallback(() => {
     history.push('/checkout');
     dispatch(toggleCartHidden());
-  };
+  }, [history, dispatch]);
 
-  const renderCartDropdownList = cartItems.map((cartItem) => (
+  const renderCartDropdownList = useMemo(()=> cartItems.map((cartItem) => (
     <CartItem key={cartItem.id} item={cartItem} />
-  ));
+  )), [cartItems]);
 
   return (
     <CartDropdownContainer>
@@ -44,4 +44,4 @@ const CartDropdown = () => {
   );
 };
 
-export default CartDropdown;
+export default React.memo(CartDropdown);

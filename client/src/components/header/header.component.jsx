@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import CartIcon from '../cart-icon/cart-icon.component';
@@ -23,7 +23,10 @@ const Header = () => {
   const currentUser = useSelector(selectCurrentUser);
   const isCartHidden = useSelector(selectCartHidden);
 
-  const signOutStartOn = () => dispatch(signOutStart());
+  const signOutStartOn = useCallback(
+    () => dispatch(signOutStart()),
+    [dispatch]
+  );
 
   const renderSignComponent = currentUser ? (
     <OptionLink as='div' onClick={signOutStartOn}>

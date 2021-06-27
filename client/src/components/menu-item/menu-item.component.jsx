@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useRouteMatch, useHistory } from 'react-router-dom';
 
 import {
@@ -13,9 +13,9 @@ const MenuItem = ({ title, imageUrl, linkUrl }) => {
   const match = useRouteMatch();
   const history = useHistory();
 
-  const addRoutesToHistory = () => {
+  const addRoutesToHistory = useCallback(() => {
     history.push(`${match.url}${linkUrl}`);
-  };
+  }, [history, linkUrl, match.url]);
 
   return (
     <MenuItemContainer onClick={addRoutesToHistory}>

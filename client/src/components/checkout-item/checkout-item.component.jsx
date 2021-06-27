@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import {
@@ -20,9 +20,18 @@ const CheckoutItem = ({ cartItem }) => {
 
   const dispatch = useDispatch();
 
-  const removeCartItem = () => dispatch(removeItemFromCart(cartItem));
-  const clearCartItem = () => dispatch(clearItemFromCart(cartItem));
-  const addCartItem = () => dispatch(addItem(cartItem));
+  const removeCartItem = useCallback(
+    () => dispatch(removeItemFromCart(cartItem)),
+    [cartItem, dispatch]
+  );
+  const clearCartItem = useCallback(
+    () => dispatch(clearItemFromCart(cartItem)),
+    [cartItem, dispatch]
+  );
+  const addCartItem = useCallback(
+    () => dispatch(addItem(cartItem)),
+    [cartItem, dispatch]
+  );
 
   return (
     <CheckoutItemContainer>

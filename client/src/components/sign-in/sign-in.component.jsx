@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
@@ -23,23 +23,33 @@ const SignIn = () => {
     password: '',
   });
 
-  const onGoogleSignInStart = () => dispatch(googleSignInStart());
-  const onEmailSignInStart = (email, password) =>
-    dispatch(emailSignInStart({ email, password }));
+  const onGoogleSignInStart = useCallback(
+    () => dispatch(googleSignInStart()),
+    [dispatch]
+  );
+  const onEmailSignInStart = useCallback(
+    (email, password) => dispatch(emailSignInStart({ email, password })),
+    [dispatch]
+  );
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
 
-    const { email, password } = signInValues;
+      const { email, password } = signInValues;
+      onEmailSignInStart(email, password);
+    },
+    [signInValues, onEmailSignInStart]
+  );
 
-    onEmailSignInStart(email, password);
-  };
-
-  const handleChange = (event) => {
-    event.preventDefault();
-    const { name, value } = event.target;
-    setSignInValues({ ...signInValues, [name]: value });
-  };
+  const handleChange = useCallback(
+    (event) => {
+      event.preventDefault();
+      const { name, value } = event.target;
+      setSignInValues({ ...signInValues, [name]: value });
+    },
+    [signInValues]
+  );
 
   return (
     <SignInContainer>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectDirectorySections } from '../../redux/directory/directory.selectors';
@@ -10,9 +10,13 @@ import { DirectoryMenuContainer } from './directory.styles';
 const Directory = () => {
   const sections = useSelector(selectDirectorySections);
 
-  const renderedSections = sections.map(({ id, ...otherSectionProps }) => {
-    return <MenuItem key={id} {...otherSectionProps} />;
-  });
+  const renderedSections = useMemo(
+    () =>
+      sections.map(({ id, ...otherSectionProps }) => {
+        return <MenuItem key={id} {...otherSectionProps} />;
+      }),
+    [sections]
+  );
 
   return <DirectoryMenuContainer>{renderedSections}</DirectoryMenuContainer>;
 };

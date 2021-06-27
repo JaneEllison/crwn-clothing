@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectCollectionsForPreview } from '../../redux/shop/shop.selectors';
@@ -9,13 +9,19 @@ import { CollectionsOverviewContainer } from './collections-overview.styles';
 const CollectionsOverview = () => {
   const collectionsData = useSelector(selectCollectionsForPreview);
 
-  const renderedCollectionsData = collectionsData.map(
-    ({ id, ...otherCollectionProps }) => {
-      return <CollectionPreview key={id} {...otherCollectionProps} />;
-    }
+  const renderedCollectionsData = useMemo(
+    () =>
+      collectionsData.map(({ id, ...otherCollectionProps }) => {
+        return <CollectionPreview key={id} {...otherCollectionProps} />;
+      }),
+    [collectionsData]
   );
 
-  return <CollectionsOverviewContainer>{renderedCollectionsData}</CollectionsOverviewContainer>;
+  return (
+    <CollectionsOverviewContainer>
+      {renderedCollectionsData}
+    </CollectionsOverviewContainer>
+  );
 };
 
 export default CollectionsOverview;
