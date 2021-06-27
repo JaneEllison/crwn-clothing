@@ -21,4 +21,9 @@ export const removeItemFromCart = (item) => ({
 
 export const clearCart = () => ({
   type: CartActionsTypes.CLEAR_CART,
-})
+});
+
+export const tokenPaymentStart = ({ token, priceForStripe }) => ({
+  type: CartActionsTypes.TOKEN_PAYMENT_START,
+  payload: { token, priceForStripe },
+});

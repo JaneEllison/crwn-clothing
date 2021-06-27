@@ -1,31 +1,22 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
-import axios from 'axios';
+
+import { tokenPaymentStart } from '../../redux/cart/cart.actions';
 
 const publishableKey = process.env.REACT_APP_PAYMENT_KEY;
 
 const StripeCheckoutButton = ({ price }) => {
   const priceForStripe = price * 100;
-  
-  const onToken = (token) => {
-    axios({
-      url: 'payment',
-      method: 'post',
-      data: {
-        amount: priceForStripe,
-        token,
-      },
-    })
-      .then((responce) => {
-        alert('Payment successful');
-      })
-      .catch((error) => {
-        console.error("Payment error: ", error);
-        alert(
-          'There was an issue with your payment. Please sure you use the provider credit cart.'
-        );
-      });
-  };
+
+  const dispatch = useDispatch();
+
+  const onToken = useCallback(
+    (token) => {
+      dispatch(tokenPaymentStart({ token, priceForStripe }));
+    },
+    [dispatch, priceForStripe]
+  );
 
   return (
     <StripeCheckout
